@@ -1,8 +1,8 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PYTHON_COMPAT=(python{2_7,3_5,3_6,3_7} pypy )
+PYTHON_COMPAT=( python{2_7,3_5,3_6} pypy )
 
 inherit distutils-r1
 
@@ -18,10 +18,6 @@ IUSE=""
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 
 python_prepare_all() {
-	# test source page
-	echo ${SRC_URI}
-	echo ${DEPEND}
-
 	#avoid file collisions picked up by the eclass
 	sed -e s":find_packages():find_packages(exclude=['tests']):" -i setup.py || die
 	distutils-r1_python_prepare_all
