@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<repositories encoding="UTF-8" version="1.1">
+  <repo priority="50" quality="experimental" status='unofficial'>
+    <name>cryptic_overlay</name>
+    <homepage>https://github.com/zchen15/cryptic_overlay</homepage>
+    <description>adding custom ebuilds to gentoo to fix tensorflow compile mess</description>
+    <source type="git">https://github.com/zchen15/cryptic_overlay.git</source>
+  </repo>
+</repositories>
