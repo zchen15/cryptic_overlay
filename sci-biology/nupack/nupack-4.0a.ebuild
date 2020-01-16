@@ -29,7 +29,8 @@ pkg_pretend() {
 }
 
 src_compile() {
-	emake \
+cmake -DCMAKE_BUILD_TYPE=Release
+emake \
 		CC="$(tc-getCC)" \
 		CPP="$(tc-getCXX)" \
 		CXX="$(tc-getCXX)" \
