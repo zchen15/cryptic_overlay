@@ -6,7 +6,7 @@ EAPI=7
 MY_PV=${PV/_/}
 MY_P=${PN}-${MY_PV}
 
-PYTHON_COMPAT=( python3_7 python3_8 )
+PYTHON_COMPAT=( python3_7 )
 
 inherit autotools python-single-r1 systemd
 
