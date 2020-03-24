@@ -26,7 +26,7 @@ src_unpack() {
 	echo getting working directory
 	echo ${WORKDIR}
 	cd ${WORKDIR}
-	git clone --recursive github.com/rvaser/spoa spoa-${PV}
+	git clone --recursive http://github.com/rvaser/spoa spoa-${PV}
 }
 
 src_configure() {
