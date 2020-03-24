@@ -25,7 +25,7 @@ pkg_pretend() {
 src_unpack() {
 	echo getting the build directory
 	echo ${WORKDIR}
-	git clone --recursive https://github.com/rvaser/spoa spoa-${PV}
+	git clone --recursive https://github.com/rvaser/spoa.git spoa-${PV}
 }
 
 src_configure() {
