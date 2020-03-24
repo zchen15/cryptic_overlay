@@ -23,22 +23,23 @@ pkg_pretend() {
 }
 
 src_unpack() {
-	echo getting the build directory
+	echo getting working directory
 	echo ${WORKDIR}
-	git clone --recursive https://github.com/rvaser/spoa.git spoa-${PV}
+	cd ${WORKDIR}
+	git clone --recursive https://github.com/rvaser/spoa spoa-${PV}
 }
 
 src_configure() {
-	mkdir ${WORKDIR}/spoa-${PV}/build
-	cd ${WORKDIR}/spoa-${PV}/build
+	mkdir ${S}/build
+	cd ${S}/build
 	cmake -DCMAKE_BUILD_TYPE=Release -Dspoa_build_executable=ON ..
 }
 
 src_compile() {
-	cd ${WORKDIR}/spoa-${PV}/build
+	cd ${S}/build
 	make
 }
 
 src_install() {
-	dobin ${WORKDIR}/spoa-${PV}/build/bin/spoa
+	dobin ${S}/build/bin/spoa
 }
