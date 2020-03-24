@@ -5,7 +5,9 @@ EAPI=7
 
 DESCRIPTION="Multi-sequence alignment using SIMD accelerated partial order align graphs"
 HOMEPAGE="https://github.com/rvaser/spoa"
-SRC_URI="https://github.com/rvaser/spoa/archive/${PV}.tar.gz"
+SRC_URI="https://github.com/rvaser/spoa/archive/${PV}.tar.gz -> spoa.tar.gz
+		https://github.com/rvaser/bioparser/archive/2.1.2.tar.gz -> bioparser.tar.gz
+		https://github.com/madler/zlib/archive/v1.2.11.tar.gz -> zlib.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 IUSE="cpu_flags_x86_sse4_2 cpu_flags_x86_sse4_1"
@@ -23,10 +25,11 @@ pkg_pretend() {
 }
 
 src_unpack() {
-	echo getting working directory
-	echo ${WORKDIR}
-	cd ${WORKDIR}
-	git clone --recursive http://github.com/rvaser/spoa spoa-${PV}
+	unpack spoa.tar.gz
+	unpack bioparser.tar.gz
+	mv ${WORKDIR}/bioparser-*/* ${S}/vendor/bioparser
+	unpack zlib.tar.gz
+	mv ${WORKDIR}/zlib-*/* ${S}/vendor/bioparser/vendor/zlib
 }
 
 src_configure() {
