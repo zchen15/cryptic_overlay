@@ -1,34 +1,34 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-
-inherit toolchain-funcs
+EAPI=7
 
 DESCRIPTION="A versatile pairwise aligner for genomic and spliced nucleotide sequences"
 HOMEPAGE="https://lh3.github.io/minimap2"
-SRC_URI="mirror://sourceforge/bio-bwa/${P}.tar.bz2"
+SRC_URI="https://github.com/lh3/${PN}/archive/v${PV}.tar.gz"
 
-LICENSE="GPL-3"
+LICENSE="MIT"
 SLOT="0"
-IUSE=""
-KEYWORDS="~amd64 ~x86 ~x64-macos"
+IUSE="cpu_flags_x86_sse4_2 cpu_flags_x86_sse4_1"
+KEYWORDS="~amd64 ~x86"
 
-RDEPEND="dev-lang/perl"
+DEPEND="sys-libs/zlib "
+BDEPEND=""
+RDEPEND=""
 
-PATCHES=( "${FILESDIR}"/${PN}-0.7.15-Makefile.patch )
-DOCS=( NEWS.md README-alt.md README.md )
+pkg_pretend() {
+	if ! use cpu_flags_x86_sse4_2 and ! use cpu_flags_x86_sse4_1 ; then
+		eerror "This package requires a CPU supporting the SSE4 instruction set."
+		die "SSE4 support missing"
+	fi
+	echo source directory = ${S}
 
-src_configure() {
-	tc-export CC AR
+}
+
+src_compile() {
+	emake
 }
 
 src_install() {
-	dobin bwa
-
-	exeinto /usr/libexec/${PN}
-	doexe qualfa2fq.pl xa2multi.pl
-
-	einstalldocs
-	doman bwa.1
+	dobin minimap2
 }
