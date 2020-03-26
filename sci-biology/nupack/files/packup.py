@@ -55,7 +55,7 @@ modules = ['rebind','visualization','cmake-modules','spdlog','json','gecode','fi
 mod_files = keep_files(mod_files, modules)
 
 # files to not packup
-ignore = ['doc','README.md','LICENSE','.git','.pdf','.png','.html','test']
+ignore = ['doc','README.md','LICENSE','.git','.pdf','.png','.html']
 
 for f in mod_files:
     # make the tarfile object
@@ -65,7 +65,11 @@ for f in mod_files:
     
     # add things to the archive
     flist = glob.glob(f+'/*')
-    ignore_files(flist, ignore)
+    if 'json' in f:
+        ignore_files(flist, ignore+['test'])
+    else:
+        ignore_files(flist, ignore)
+    
     for k in flist:
         print('adding',k)
         arcname = './'+k.split('external/')[-1]

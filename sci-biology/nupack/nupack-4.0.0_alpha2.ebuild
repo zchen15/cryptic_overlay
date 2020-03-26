@@ -43,7 +43,8 @@ pkg_pretend() {
 
 src_unpack() {
 	unpack nupack.tar.gz
-	for i in {rebind, find-tbb, spdlog}
+	# unpack external modules
+	for i in rebind find-tbb spdlog json gecode cmake-modules
 	do
 		echo unpacking $i
 		unpack $i.tar.gz
