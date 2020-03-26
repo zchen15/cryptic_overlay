@@ -60,7 +60,8 @@ src_configure() {
 
 src_compile() {
 	cd ${S}/build
-	make
+	make -j4 python
+	#emake
 }
 
 #src_install() {
