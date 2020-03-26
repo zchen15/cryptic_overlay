@@ -9,7 +9,6 @@ HOMEPAGE="http://nupack.org/"
 REPO="https://github.com/zchen15/cryptic_overlay/raw/master/sci-biology/${PN}/files"
 SRC_URI="${REPO}/${PV}.tar.gz -> nupack.tar.gz
 		${REPO}/rebind.tar.gz
-		${REPO}/lilwil.tar.gz
 		${REPO}/find-tbb.tar.gz
 		${REPO}/armadillo.tar.gz"
 #SRC_URI="https://github.com/mfornace/${PN}/archive/4.0.a2.tar.gz -> nupack.tar.gz"
@@ -27,7 +26,8 @@ RDEPEND="sci-libs/scipy
 		jupyter? ( dev-python/jupyter )"
 BDEPEND="tbb? ( dev-cpp/tbb )
 		sci-libs/armadillo
-		dev-libs/boost"
+		dev-libs/boost
+		dev-libs/spdlog"
 DEPEND=""
 
 pkg_pretend() {
@@ -41,8 +41,9 @@ src_unpack() {
 	unpack nupack.tar.gz
 	unpack rebind.tar.gz
 	mv ${WORKDIR}/rebind/* ${S}/external/rebind/
-	unpack lilwil.tar.gz
-	mv ${WORKDIR}/lilwil/* ${S}/external/lilwil/
+	unpack find-tbb.tar.gz
+	mv ${WORKDIR}/find-tbb/* ${S}/external/find-tbb/
+
 }
 
 src_configure() {
