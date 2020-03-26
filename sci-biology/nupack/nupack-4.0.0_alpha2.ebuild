@@ -14,6 +14,9 @@ SRC_URI="${REPO}/${PV}.tar.gz -> nupack.tar.gz
 		${REPO}/spdlog.tar.gz
 		${REPO}/json.tar.gz
 		${REPO}/cmake-modules.tar.gz
+		${REPO}/cmake-common.tar.gz
+		${REPO}/cotire.tar.gz
+		${REPO}/nupack-draw.tar.gz
 		${REPO}/gecode.tar.gz"
 #SRC_URI="https://github.com/mfornace/${PN}/archive/4.0.a2.tar.gz -> nupack.tar.gz"
 S="${WORKDIR}/nupack-4.0.a2"
@@ -44,11 +47,12 @@ pkg_pretend() {
 src_unpack() {
 	unpack nupack.tar.gz
 	# unpack external modules
-	for i in rebind find-tbb spdlog json gecode cmake-modules
+	for i in rebind find-tbb spdlog cotire json gecode cmake-modules cmake-common visualization nupack-draw
 	do
 		echo unpacking $i
 		unpack $i.tar.gz
 		mv ${WORKDIR}/$i/* ${S}/external/$i/
+		rmdir ${WORKDIR}/$i
 	done
 }
 
@@ -60,8 +64,7 @@ src_configure() {
 
 src_compile() {
 	cd ${S}/build
-	make -j4 python
-	#emake
+	emake
 }
 
 #src_install() {

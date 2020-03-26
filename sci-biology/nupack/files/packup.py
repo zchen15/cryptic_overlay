@@ -51,7 +51,8 @@ print('building tarball for ',args.i)
 mod_files = glob.glob(args.i+'/external/*')
 
 # build tars only of these modules
-modules = ['rebind','visualization','cmake-modules','spdlog','json','gecode','find-tbb','armadillo']
+modules = ['rebind','visualization','nupack-draw','cmake-common','cmake-modules',
+           'cotire','spdlog','json','gecode','find-tbb','armadillo']
 mod_files = keep_files(mod_files, modules)
 
 # files to not packup
