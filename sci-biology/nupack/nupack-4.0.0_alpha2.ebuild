@@ -5,13 +5,19 @@ EAPI=7
 
 DESCRIPTION="NUPACK, a software suite for design and analysis of nucleic acid structures"
 HOMEPAGE="http://nupack.org/"
-SRC_URI="https://github.com/zchen15/cryptic_overlay/raw/master/sci-biology/${PN}/files/${PV}.tar.gz -> nupack.tar.gz"
+
+REPO = "https://github.com/zchen15/cryptic_overlay/raw/master/sci-biology/${PN}/files"
+SRC_URI="${REPO}/${PV}.tar.gz -> nupack.tar.gz
+		${REPO}/rebind.tar.gz
+		${REPO}/lilwil.tar.gz
+		${REPO}/find-tbb.tar.gz
+		${REPO}/armadillo.tar.gz"
 #SRC_URI="https://github.com/mfornace/${PN}/archive/4.0.a2.tar.gz -> nupack.tar.gz"
 S="${WORKDIR}/nupack-4.0.a2"
 
 KEYWORDS="~amd64 ~x86"
 SLOT=0
-IUSE="cpu_flags_x86_sse2 bokeh matplotlib jupyter"
+IUSE="cpu_flags_x86_sse2 tbb bokeh matplotlib jupyter"
 
 RDEPEND="sci-libs/scipy
 		sci-libs/numpy
@@ -19,7 +25,7 @@ RDEPEND="sci-libs/scipy
 		bokeh? ( dev-python/bokeh )
 		matplotlib? ( dev-python/matplotlib )
 		jupyter? ( dev-python/jupyter )"
-BDEPEND="dev-cpp/tbb
+BDEPEND="tbb? ( dev-cpp/tbb )
 		sci-libs/armadillo
 		dev-libs/boost"
 DEPEND=""
@@ -40,7 +46,7 @@ src_unpack() {
 src_configure() {
 	mkdir ${S}/build
 	cd ${S}/build
-	cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF ..
+	cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF
 }
 
 src_compile() {
@@ -48,31 +54,5 @@ src_compile() {
 	make
 }
 
-
-src_compile() {
-	cmake -DCMAKE_BUILD_TYPE=Release
-	emake \
-			CC="$(tc-getCC)" \
-			CPP="$(tc-getCXX)" \
-			CXX="$(tc-getCXX)" \
-			CFLAGS="" \
-			CXXFLAGS="" \
-			EXTRA_FLAGS="${LDFLAGS}" \
-			RELEASE_FLAGS="${CXXFLAGS} -msse2" \
-			WITH_TBB="$(usex tbb 1 0)"
-}
-
-src_install() {
-	dobin ${PN}2 ${PN}2-*
-
-	exeinto /usr/libexec/${PN}2
-	doexe scripts/*
-
-	newman MANUAL ${PN}2.1
-	einstalldocs
-
-	if use examples; then
-		insinto /usr/share/${PN}2
-		doins -r example
-	fi
-}
+#src_install() {
+#}
