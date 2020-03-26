@@ -61,7 +61,7 @@ for f in mod_files:
     # make the tarfile object
     print('building tarball for',f)
     fname = f.split('/')[-1]
-    tar = tarfile.open(fname+'.tar.gz', 'w')
+    tar = tarfile.open(fname+'.tar.gz', mode='w:gz')
     
     # add things to the archive
     flist = glob.glob(f+'/*')
