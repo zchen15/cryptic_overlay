@@ -39,8 +39,10 @@ pkg_pretend() {
 
 src_unpack() {
 	unpack nupack.tar.gz
-	#unpack zlib.tar.gz
-	#mv ${WORKDIR}/zlib-*/* ${S}/vendor/bioparser/vendor/zlib
+	unpack rebind.tar.gz
+	mv ${WORKDIR}/rebind/* ${S}/external/rebind
+	unpack lilwil.tar.gz
+	mv ${WORKDIR}/lilwil/* ${S}/external/lilwil
 }
 
 src_configure() {
