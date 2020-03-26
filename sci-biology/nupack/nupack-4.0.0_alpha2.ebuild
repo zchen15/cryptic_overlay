@@ -23,7 +23,7 @@ SLOT=0
 IUSE="cpu_flags_x86_sse2 tbb bokeh matplotlib jupyter"
 
 RDEPEND="sci-libs/scipy
-		sci-libs/numpy
+		dev-python/numpy
 		dev-lang/python
 		bokeh? ( dev-python/bokeh )
 		matplotlib? ( dev-python/matplotlib )
