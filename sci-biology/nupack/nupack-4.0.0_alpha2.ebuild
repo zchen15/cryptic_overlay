@@ -10,6 +10,7 @@ REPO="https://github.com/zchen15/cryptic_overlay/raw/master/sci-biology/${PN}/fi
 SRC_URI="${REPO}/${PV}.tar.gz -> nupack.tar.gz
 		${REPO}/rebind.tar.gz
 		${REPO}/find-tbb.tar.gz
+		${REPO}/armadillo.tar.gz
 		${REPO}/boost-simd.tar.gz
 		${REPO}/spdlog.tar.gz
 		${REPO}/json.tar.gz
@@ -49,12 +50,12 @@ pkg_pretend() {
 src_unpack() {
 	unpack nupack.tar.gz
 	# unpack external modules
-	for i in rebind find-tbb boost-simd spdlog cotire json gecode backward-cpp cmake-modules cmake-common visualization nupack-draw
+	for i in rebind find-tbb armadillo boost-simd spdlog cotire json gecode backward-cpp cmake-modules cmake-common visualization nupack-draw
 	do
 		echo unpacking $i
 		unpack $i.tar.gz
-		mv ${WORKDIR}/$i/* ${S}/external/$i/
-		rmdir ${WORKDIR}/$i
+		rmdir ${S}/external/*
+		mv ${WORKDIR}/$i ${S}/external/$i
 	done
 }
 
