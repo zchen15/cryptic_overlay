@@ -10,7 +10,11 @@ REPO="https://github.com/zchen15/cryptic_overlay/raw/master/sci-biology/${PN}/fi
 SRC_URI="${REPO}/${PV}.tar.gz -> nupack.tar.gz
 		${REPO}/rebind.tar.gz
 		${REPO}/find-tbb.tar.gz
-		${REPO}/armadillo.tar.gz"
+		${REPO}/armadillo.tar.gz
+		${REPO}/spdlog.tar.gz
+		${REPO}/json.tar.gz
+		${REPO}/cmake-modules.tar.gz
+		${REPO}/gecode.tar.gz"
 #SRC_URI="https://github.com/mfornace/${PN}/archive/4.0.a2.tar.gz -> nupack.tar.gz"
 S="${WORKDIR}/nupack-4.0.a2"
 
@@ -39,11 +43,12 @@ pkg_pretend() {
 
 src_unpack() {
 	unpack nupack.tar.gz
-	unpack rebind.tar.gz
-	mv ${WORKDIR}/rebind/* ${S}/external/rebind/
-	unpack find-tbb.tar.gz
-	mv ${WORKDIR}/find-tbb/* ${S}/external/find-tbb/
-
+	for i in {rebind, find-tbb, spdlog}
+	do
+		echo unpacking $i
+		unpack $i.tar.gz
+		mv ${WORKDIR}/$i/* ${S}/external/$i/
+	done
 }
 
 src_configure() {
