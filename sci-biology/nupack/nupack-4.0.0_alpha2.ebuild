@@ -6,7 +6,7 @@ EAPI=7
 DESCRIPTION="NUPACK, a software suite for design and analysis of nucleic acid structures"
 HOMEPAGE="http://nupack.org/"
 
-REPO = "https://github.com/zchen15/cryptic_overlay/raw/master/sci-biology/${PN}/files"
+REPO="https://github.com/zchen15/cryptic_overlay/raw/master/sci-biology/${PN}/files"
 SRC_URI="${REPO}/${PV}.tar.gz -> nupack.tar.gz
 		${REPO}/rebind.tar.gz
 		${REPO}/lilwil.tar.gz

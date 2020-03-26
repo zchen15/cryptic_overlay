@@ -68,7 +68,7 @@ for f in mod_files:
     ignore_files(flist, ignore)
     for k in flist:
         print('adding',k)
-        arcname = k.split('external/')[-1]
+        arcname = './'+k.split('external/')[-1]
         tar.add(k, arcname=arcname ,filter=reset)
     tar.close()
 
