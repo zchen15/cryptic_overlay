@@ -40,9 +40,9 @@ pkg_pretend() {
 src_unpack() {
 	unpack nupack.tar.gz
 	unpack rebind.tar.gz
-	mv ${WORKDIR}/rebind/* ${S}/external/rebind
+	mv ${WORKDIR}/rebind/* ${S}/external/rebind/
 	unpack lilwil.tar.gz
-	mv ${WORKDIR}/lilwil/* ${S}/external/lilwil
+	mv ${WORKDIR}/lilwil/* ${S}/external/lilwil/
 }
 
 src_configure() {
