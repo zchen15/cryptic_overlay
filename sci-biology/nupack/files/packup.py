@@ -52,7 +52,7 @@ mod_files = glob.glob(args.i+'/external/*')
 
 # build tars only of these modules
 modules = ['rebind','visualization','nupack-draw','cmake-common','cmake-modules',
-           'cotire','spdlog','json','gecode','find-tbb','armadillo']
+           'cotire','spdlog','json','gecode','find-tbb','armadillo','boost-simd']
 mod_files = keep_files(mod_files, modules)
 
 # files to not packup
