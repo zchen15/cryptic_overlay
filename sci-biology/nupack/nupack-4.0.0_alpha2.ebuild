@@ -5,7 +5,8 @@ EAPI=7
 
 DESCRIPTION="NUPACK, a software suite for design and analysis of nucleic acid structures"
 HOMEPAGE="http://nupack.org/"
-SRC_URI="https://github.com/mfornace/${PN}/archive/4.0.a2.tar.gz -> nupack.tar.gz"
+SRC_URI="https://github.com/zchen15/cryptic_overlay/sci-biology/nupack/files/${PV}.tar.gz"
+#SRC_URI="https://github.com/mfornace/${PN}/archive/4.0.a2.tar.gz -> nupack.tar.gz"
 
 KEYWORDS="~amd64 ~x86"
 SLOT=0
