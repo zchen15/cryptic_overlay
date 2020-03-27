@@ -11,16 +11,17 @@ SRC_URI="${REPO}/${PV}.tar.gz -> nupack.tar.gz
 		${REPO}/rebind.tar.gz
 		${REPO}/find-tbb.tar.gz
 		${REPO}/armadillo.tar.gz
-		${REPO}/boost-simd.tar.gz
-		${REPO}/spdlog.tar.gz
-		${REPO}/json.tar.gz
 		${REPO}/cmake-modules.tar.gz
-		${REPO}/cmake-common.tar.gz
 		${REPO}/backward-cpp.tar.gz
-		${REPO}/cotire.tar.gz
 		${REPO}/nupack-draw.tar.gz
 		${REPO}/visualization.tar.gz
-		${REPO}/gecode.tar.gz"
+		https://github.com/remymuller/boost.simd/archive/v4.17.6.0.tar.gz -> boost-simd.tar.gz
+		https://github.com/nlohmann/json/archive/v3.7.3.tar.gz -> json.tar.gz
+		https://github.com/cameron314/concurrentqueue/archive/v1.0.1.tar.gz -> concurrentqueue.tar.gz
+		https://github.com/sakra/cotire/archive/cotire-1.8.1.tar.gz -> cotire.tar.gz
+		https://github.com/Eyescale/CMake/archive/2018.02.tar.gz -> cmake-common.tar.gz
+		https://github.com/gabime/spdlog/archive/v1.5.0.tar.gz -> spdlog.tar.gz
+		https://github.com/Gecode/gecode/archive/release-6.2.0.tar.gz -> gecode.tar.gz"
 #SRC_URI="https://github.com/mfornace/${PN}/archive/4.0.a2.tar.gz -> nupack.tar.gz"
 S="${WORKDIR}/nupack-4.0.a2"
 
@@ -50,19 +51,19 @@ pkg_pretend() {
 src_unpack() {
 	unpack nupack.tar.gz
 	# unpack external modules
-	for i in rebind find-tbb armadillo boost-simd spdlog cotire json gecode backward-cpp cmake-modules cmake-common visualization nupack-draw
+	rmdir ${S}/external/*
+	for i in rebind find-tbb armadillo boost-simd spdlog cotire json gecode backward-cpp cmake-modules cmake-common concurrentqueue visualization nupack-draw
 	do
 		echo unpacking $i
-		unpack $i.tar.gz
-		rmdir ${S}/external/*
-		mv ${WORKDIR}/$i ${S}/external/$i
+		mkdir ${S}/external/$i
+		tar -xf $i.tar.gz -C ${S}/external/$i
 	done
 }
 
 src_configure() {
 	mkdir ${S}/build
 	cd ${S}/build
-	cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF
+	cmake .. -DREBIND_PYTHON=/usr/bin/python3 -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++
 }
 
 src_compile() {
