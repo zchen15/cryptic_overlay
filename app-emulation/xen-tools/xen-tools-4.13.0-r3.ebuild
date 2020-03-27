@@ -3,8 +3,8 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_6 python3_7 )
-PYTHON_REQ_USE='ncurses,xml,threads'
+PYTHON_COMPAT=( python3_7 )
+PYTHON_REQ_USE='ncurses,xml'
 
 inherit bash-completion-r1 flag-o-matic multilib python-single-r1 toolchain-funcs
 
