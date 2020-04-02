@@ -33,11 +33,9 @@ src_install() {
 	into /opt/ont-guppy/
 	dobin ${S}/bin/*
 	# install libs
-	into /opt/ont-guppy/
-	dolib.so ${S}/lib/* /opt/ont-guppy/lib/
+	insinto /opt/ont-guppy/
+	doins ${S}/lib
 	# install data
 	insinto /opt/ont-guppy/
 	doins -r ${S}/data
-	# do sym on bin
-	ln -s /opt/ont-guppy/lib64 /opt/ont-guppy/lib
 }
