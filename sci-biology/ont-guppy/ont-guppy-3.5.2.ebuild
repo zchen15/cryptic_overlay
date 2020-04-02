@@ -29,13 +29,14 @@ src_install() {
 	rm ${S}/bin/THIRD_PARTY_LICENSES
 	rm ${S}/bin/*.pdf
 	echo installing binaries and libs
-	# do symlink on binaries
-	into /opt/ont-guppy/
-	dobin ${S}/bin/*
 	# install libs
 	insinto /opt/ont-guppy/
-	doins ${S}/lib
+	doins -r ${S}/lib
 	# install data
 	insinto /opt/ont-guppy/
 	doins -r ${S}/data
+	# do symlink on binaries
+	into /opt/ont-guppy/
+	dobin ${S}/bin/*
+
 }
