@@ -30,13 +30,13 @@ src_install() {
 	rm ${S}/bin/*.pdf
 	echo installing binaries and libs
 	# do symlink on binaries
-	insinto /opt/ont-guppy/bin/
+	into /opt/ont-guppy/bin/
 	dobin ${S}/bin/*
 	# install libs
-	insinto /opt/ont-guppy/lib/
+	into /opt/ont-guppy/lib/
 	dolib.so ${S}/lib/*
 	# install data
-	insinto /opt/ont-guppy/data/
+	into /opt/ont-guppy/data/
 	doins -r ${S}/data
 	# do sym on bin
 }
