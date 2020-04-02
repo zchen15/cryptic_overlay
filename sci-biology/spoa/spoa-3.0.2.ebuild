@@ -11,7 +11,7 @@ SRC_URI="https://github.com/rvaser/spoa/archive/${PV}.tar.gz -> spoa.tar.gz
 LICENSE="MIT"
 SLOT="0"
 IUSE="cpu_flags_x86_sse4_2 cpu_flags_x86_sse4_1"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 
 DEPEND=""
 BDEPEND=""
@@ -40,7 +40,7 @@ src_configure() {
 
 src_compile() {
 	cd ${S}/build
-	make
+	emake
 }
 
 src_install() {

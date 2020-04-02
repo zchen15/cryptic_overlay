@@ -51,13 +51,24 @@ pkg_pretend() {
 src_unpack() {
 	unpack nupack.tar.gz
 	# unpack external modules
-	rmdir ${S}/external/*
-	for i in rebind find-tbb armadillo boost-simd spdlog cotire json gecode backward-cpp cmake-modules cmake-common concurrentqueue visualization nupack-draw
+	for i in rebind find-tbb armadillo spdlog cotire json gecode backward-cpp cmake-modules concurrentqueue visualization nupack-draw
 	do
 		echo unpacking $i
+		unpack $i.tar.gz
 		mkdir ${S}/external/$i
-		tar -xf $i.tar.gz -C ${S}/external/$i
+		mv $i*/* ${S}/external/$i
+		rmdir $i*
 	done
+	
+	echo unpacking boost.simd
+	unpack boost-simd.tar.gz
+	mv boost.simd*/* ${S}/external/boost-simd
+	rmdir boost.simd*
+
+	echo unpacking cmake common
+	unpack cmake-common.tar.gz
+	mv CMake*/* ${S}/external/cmake-common
+	rmdir Cmake*
 }
 
 src_configure() {

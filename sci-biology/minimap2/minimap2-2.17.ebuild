@@ -10,7 +10,7 @@ SRC_URI="https://github.com/lh3/${PN}/archive/v${PV}.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 IUSE="cpu_flags_x86_sse4_2 cpu_flags_x86_sse4_1"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 
 DEPEND="sys-libs/zlib "
 BDEPEND=""
