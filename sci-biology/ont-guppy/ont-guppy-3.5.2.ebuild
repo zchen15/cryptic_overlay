@@ -22,14 +22,15 @@ src_compile() {
 }
 
 src_install() {
-	echo linking libraries
+	echo linking libs
 	ln -s /usr/lib64/libidn.so.12 ${S}/lib/libidn.so.11
 	rm ${S}/lib/libz.so
-	echo making binaries executable
-	chmod +x ${S}/bin/*
 	echo removing license files
 	rm ${S}/bin/THIRD_PARTY_LICENSES
 	rm ${S}/bin/*.pdf
+	echo installing binaries and libs
 	insinto /opt/
 	doins -r ${S}
+	echo making binaries executable
+	chmod +x /opt/ont-guppy/bin/*
 }
