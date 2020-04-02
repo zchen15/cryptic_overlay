@@ -25,6 +25,11 @@ src_install() {
 	echo linking libraries
 	ln -s /usr/lib64/libidn.so.12 ${S}/lib/libidn.so.11
 	rm ${S}/lib/libz.so
+	echo making binaries executable
+	chmod +x ${S}/bin/*
+	echo removing license files
+	rm ${S}/bin/THIRD_PARTY_LICENSES
+	rm ${S}/bin/*.pdf
 	insinto /opt/
 	doins -r ${S}
 }
