@@ -29,8 +29,14 @@ src_install() {
 	rm ${S}/bin/THIRD_PARTY_LICENSES
 	rm ${S}/bin/*.pdf
 	echo installing binaries and libs
-	insinto /opt/
-	doins -r ${S}
-	echo making binaries executable
-	chmod +x /opt/ont-guppy/bin/*
+	# do symlink on binaries
+	insinto /opt/ont-guppy/bin/
+	dobin ${S}/bin/*
+	# install libs
+	insinto /opt/ont-guppy/lib/
+	dolib.so ${S}/lib/*
+	# install data
+	insinto /opt/ont-guppy/data/
+	doins -r ${S}/data
+	# do sym on bin
 }
