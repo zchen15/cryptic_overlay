@@ -15,13 +15,16 @@ KEYWORDS="amd64 x86"
 
 DEPEND=""
 BDEPEND=""
-RDEPEND=""
+RDEPEND="app-crypt/mit-krb5"
 
 src_compile() {
 	echo Installing binaries
 }
 
 src_install() {
+	echo linking libraries
+	ln -s /usr/lib64/libidn.so.12 ${S}/lib/libidn.so.11
+	rm ${S}/lib/libz.so
 	insinto /opt/
 	doins -r ${S}
 }
