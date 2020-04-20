@@ -9,11 +9,9 @@ HOMEPAGE="http://nupack.org/"
 REPO="https://github.com/zchen15/cryptic_overlay/raw/master/sci-biology/${PN}/files"
 SRC_URI="${REPO}/${PV}.tar.gz -> nupack.tar.gz
 		${REPO}/rebind.tar.gz
-		${REPO}/find-tbb.tar.gz
 		${REPO}/cmake-modules.tar.gz
 		${REPO}/backward-cpp.tar.gz
 		${REPO}/nupack-draw.tar.gz
-		${REPO}/visualization.tar.gz
 		${REPO}/gecode.tar.gz
 		https://github.com/remymuller/boost.simd/archive/v4.17.6.0.tar.gz -> boost-simd.tar.gz
 		https://github.com/nlohmann/json/archive/v3.7.3.tar.gz -> json.tar.gz
@@ -50,7 +48,7 @@ pkg_pretend() {
 src_unpack() {
 	unpack nupack.tar.gz
 	# unpack external modules
-	for i in rebind find-tbb spdlog cotire json gecode backward-cpp cmake-modules visualization nupack-draw
+	for i in rebind spdlog cotire json gecode backward-cpp cmake-modules nupack-draw
 	do
 		echo unpacking $i
 		unpack $i.tar.gz
