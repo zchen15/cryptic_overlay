@@ -10,18 +10,17 @@ REPO="https://github.com/zchen15/cryptic_overlay/raw/master/sci-biology/${PN}/fi
 SRC_URI="${REPO}/${PV}.tar.gz -> nupack.tar.gz
 		${REPO}/rebind.tar.gz
 		${REPO}/find-tbb.tar.gz
-		${REPO}/armadillo.tar.gz
 		${REPO}/cmake-modules.tar.gz
 		${REPO}/backward-cpp.tar.gz
 		${REPO}/nupack-draw.tar.gz
 		${REPO}/visualization.tar.gz
+		${REPO}/gecode.tar.gz
 		https://github.com/remymuller/boost.simd/archive/v4.17.6.0.tar.gz -> boost-simd.tar.gz
 		https://github.com/nlohmann/json/archive/v3.7.3.tar.gz -> json.tar.gz
-		https://github.com/cameron314/concurrentqueue/archive/v1.0.1.tar.gz -> concurrentqueue.tar.gz
 		https://github.com/sakra/cotire/archive/cotire-1.8.1.tar.gz -> cotire.tar.gz
 		https://github.com/Eyescale/CMake/archive/2018.02.tar.gz -> cmake-common.tar.gz
-		https://github.com/gabime/spdlog/archive/v1.5.0.tar.gz -> spdlog.tar.gz
-		https://github.com/Gecode/gecode/archive/release-6.2.0.tar.gz -> gecode.tar.gz"
+		https://github.com/gabime/spdlog/archive/v1.5.0.tar.gz -> spdlog.tar.gz"
+#https://github.com/Gecode/gecode/archive/release-6.2.0.tar.gz -> gecode.tar.gz
 #SRC_URI="https://github.com/mfornace/${PN}/archive/4.0.a2.tar.gz -> nupack.tar.gz"
 S="${WORKDIR}/nupack-4.0.a2"
 
@@ -51,7 +50,7 @@ pkg_pretend() {
 src_unpack() {
 	unpack nupack.tar.gz
 	# unpack external modules
-	for i in rebind find-tbb armadillo spdlog cotire json gecode backward-cpp cmake-modules concurrentqueue visualization nupack-draw
+	for i in rebind find-tbb spdlog cotire json gecode backward-cpp cmake-modules visualization nupack-draw
 	do
 		echo unpacking $i
 		unpack $i.tar.gz
@@ -59,7 +58,7 @@ src_unpack() {
 		mv $i*/* ${S}/external/$i
 		rmdir $i*
 	done
-	
+
 	echo unpacking boost.simd
 	unpack boost-simd.tar.gz
 	mv boost.simd*/* ${S}/external/boost-simd
@@ -74,13 +73,10 @@ src_unpack() {
 src_configure() {
 	mkdir ${S}/build
 	cd ${S}/build
-	cmake .. -DREBIND_PYTHON=/usr/bin/python3 -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++
+	cmake .. -DBUILD_TESTING=OFF -DREBIND_PYTHON=python3 -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DNUPACK_SIMD_FLAGS="-msse;-msse2;-msse3;-msse4" -DCMAKE_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC -DJSON_USE_INT64_DOUBLE_CONVERSION=1" -DCMAKE_BUILD_TYPE=Release -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 }
 
 src_compile() {
 	cd ${S}/build
-	emake
+	cmake --build . --target python
 }
-
-#src_install() {
-#}
