@@ -84,7 +84,9 @@ src_compile() {
 DISTUTILS_USE_SETUPTOOLS="no"
 
 python_install() {
+	cd ${S}/build
 	distutils-r1_python_install
 	python_optimize
 }
+
 
