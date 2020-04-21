@@ -81,7 +81,10 @@ src_compile() {
 	cmake --build . --target python
 }
 
+DISTUTILS_USE_SETUPTOOLS="no"
+
 python_install() {
 	distutils-r1_python_install
 	python_optimize
 }
+
