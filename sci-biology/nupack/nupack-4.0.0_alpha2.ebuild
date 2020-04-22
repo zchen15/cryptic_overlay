@@ -82,8 +82,9 @@ src_compile() {
 
 src_install() {
 	cd ${S}/build
-	distutils-r1_python_install
-	#esetup.py install
+	#distutils-r1_python_install
+	echo python_get_sitedir
+	esetup.py install
 	python_optimize
 }
 
