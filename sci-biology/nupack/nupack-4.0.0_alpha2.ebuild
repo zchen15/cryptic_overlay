@@ -75,6 +75,7 @@ src_unpack() {
 
 src_prepare() {
 	eapply "${FILESDIR}/noscript.patch"
+	eapply "${FILESDIR}/rebind.patch"
 	eapply_user
 }
 
@@ -85,16 +86,25 @@ src_configure() {
 }
 
 src_compile() {
+	# build nupack modules
 	cd ${S}/build
 	cmake --build . --target python
+	esetup.py build
+	# build rebind modules
+	cd ${S}/external/rebind/
 	esetup.py build
 }
 
 python_install() {
+	# install rebind module
+	cd ${S}/external/rebind
+	distutils-r1_python_install
+	#python_optimize
+	python_domodule ${S}/external/rebind/build/lib/rebind
+	# install nupack
 	cd ${S}/build
 	distutils-r1_python_install
-	#python_moduleinto
+	#python_optimize
 	python_domodule ${S}/build/build/lib/nupack
-	python_optimize
 }
 
