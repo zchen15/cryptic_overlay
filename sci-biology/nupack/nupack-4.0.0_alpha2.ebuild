@@ -49,6 +49,7 @@ PATCHES=("${FILESDIR}/noscript.patch")
 src_unpack() {
 	unpack nupack.tar.gz
 	# unpack external modules
+	mkdir ${S}/external
 	for i in rebind spdlog json gecode backward-cpp cmake-modules nupack-draw
 	do
 		echo unpacking $i
@@ -65,11 +66,11 @@ src_unpack() {
 	mv CMake*/* ${S}/external/cmake-common
 }
 
-src_prepare() {
-	eapply "${FILESDIR}/noscript.patch"
-	eapply "${FILESDIR}/rebind.patch"
-	eapply_user
-}
+#src_prepare() {
+#	eapply "${FILESDIR}/noscript.patch"
+#	eapply "${FILESDIR}/rebind.patch"
+#	eapply_user
+#}
 
 src_configure() {
 	mkdir ${S}/build
