@@ -84,6 +84,7 @@ src_install() {
 	cd ${S}/build
 	#distutils-r1_python_install
 	python -m site
+	mkdir /usr/lib/python3.7/site-packages/nupack
 	esetup.py install
 	python_optimize
 }
