@@ -83,10 +83,12 @@ src_compile() {
 
 DISTUTILS_USE_SETUPTOOLS="no"
 
-python_install() {
-	cd ${S}/build
-	distutils-r1_python_install
-	python_optimize
+src_install() {
+	cd ${S}
+	pip install build/
+	#pip install external/rebind/
 }
 
-
+pkg_prerm() {
+	pip uninstall nupack
+}
