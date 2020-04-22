@@ -7,7 +7,7 @@ DESCRIPTION="NUPACK, a software suite for design and analysis of nucleic acid st
 HOMEPAGE="http://nupack.org/"
 
 REPO="https://github.com/zchen15/cryptic_overlay/raw/master/sci-biology/${PN}/files"
-SRC_URI="${REPO}/${PV}.tar.gz -> nupack.tar.gz
+SRC_URI="${REPO}/src.tar.gz -> nupack.tar.gz
 		${REPO}/rebind.tar.gz
 		${REPO}/cmake-modules.tar.gz
 		${REPO}/backward-cpp.tar.gz
@@ -21,8 +21,8 @@ SRC_URI="${REPO}/${PV}.tar.gz -> nupack.tar.gz
 		https://github.com/Eyescale/CMake/archive/2018.02.tar.gz -> cmake-common.tar.gz
 		https://github.com/gabime/spdlog/archive/v1.5.0.tar.gz -> spdlog.tar.gz"
 #https://github.com/Gecode/gecode/archive/release-6.2.0.tar.gz -> gecode.tar.gz
-#SRC_URI="https://github.com/mfornace/${PN}/archive/4.0.a2.tar.gz -> nupack.tar.gz"
-S="${WORKDIR}/nupack-4.0.a2"
+#S="${WORKDIR}/nupack-4.0.a2"
+S="${WORKDIR}/nupack"
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 DISTUTILS_SINGLE_IMPL=1
@@ -30,7 +30,7 @@ inherit distutils-r1
 
 KEYWORDS="~amd64 ~x86"
 SLOT=0
-IUSE="cpu_flags_x86_sse2 tbb bokeh matplotlib jupyter"
+IUSE="tbb bokeh matplotlib jupyter"
 
 RDEPEND="sci-libs/scipy
 		dev-python/numpy
@@ -46,18 +46,10 @@ DEPEND=""
 
 PATCHES=("${FILESDIR}/noscript.patch")
 
-
-pkg_pretend() {
-	if ! use cpu_flags_x86_sse2 ; then
-		eerror "This package requires a CPU supporting the SSE2 instruction set."
-		die "SSE2 support missing"
-	fi
-}
-
 src_unpack() {
 	unpack nupack.tar.gz
 	# unpack external modules
-	for i in rebind spdlog cotire json gecode find-tbb backward-cpp cmake-modules nupack-draw visualization
+	for i in rebind spdlog json gecode backward-cpp cmake-modules nupack-draw
 	do
 		echo unpacking $i
 		unpack $i.tar.gz

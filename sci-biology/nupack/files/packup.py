@@ -48,11 +48,17 @@ if args.i==None:
     print('Input file not set')
     sys.exit(1)
 print('building tarball for ',args.i)
-mod_files = glob.glob(args.i+'/external/*')
+
 
 # build tars only of these modules
 modules = ['rebind','visualization','nupack-draw','backward-cpp','cmake-modules','gecode','find-tbb']
+mod_files = glob.glob(args.i+'/external/*')
 mod_files = keep_files(mod_files, modules)
+
+# build tars of src from these files
+src_folder = ['CMakeLists.txt','README.md','cmake','nupack/nupack','executables','parameters','package','python']
+src_files = glob.glob(args.i+'/*')
+src_files = keep_files(src_files, src_folder)
 
 # files to not packup
 ignore = ['README.md','LICENSE','.git','.pdf','.png','.html']
@@ -65,14 +71,20 @@ for f in mod_files:
     
     # add things to the archive
     flist = glob.glob(f+'/*')
-    if 'json' in f:
-        ignore_files(flist, ignore+['test'])
-    else:
-        ignore_files(flist, ignore)
+    ignore_files(flist, ignore)
     
     for k in flist:
         print('adding',k)
         arcname = './'+k.split('external/')[-1]
-        tar.add(k, arcname=arcname ,filter=reset)
+        tar.add(k, arcname=arcname, filter=reset)
     tar.close()
 
+tar = tarfile.open('src.tar.gz', mode='w:gz')
+for k in src_files:
+    print('adding ',k)
+    if 'nupack/nupack' in k:
+        arcname = './nupack/nupack'
+    else:
+        arcname = './nupack/'+k.split('/nupack/')[-1]
+    tar.add(k, arcname=arcname, filter=reset)
+tar.close()
