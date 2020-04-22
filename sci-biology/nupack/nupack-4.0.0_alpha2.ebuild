@@ -44,6 +44,9 @@ BDEPEND="tbb? ( dev-cpp/tbb )
 		dev-libs/spdlog"
 DEPEND=""
 
+PATCHES=("${FILESDIR}/noscript.patch")
+
+
 pkg_pretend() {
 	if ! use cpu_flags_x86_sse2 ; then
 		eerror "This package requires a CPU supporting the SSE2 instruction set."
@@ -68,6 +71,10 @@ src_unpack() {
 	echo unpacking cmake common
 	unpack cmake-common.tar.gz
 	mv CMake*/* ${S}/external/cmake-common
+}
+
+src_prepare() {
+	epatch "${FILESDIR}/noscript.patch"
 }
 
 src_configure() {

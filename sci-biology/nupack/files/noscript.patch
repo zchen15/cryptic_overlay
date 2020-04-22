@@ -1,0 +1,11 @@
+--- nupack-4.0.a2.orig/package/setup.py	2019-09-25 10:12:20.000000000 -0700
++++ nupack-4.0.a2/package/setup.py	2020-04-22 12:57:35.347303556 -0700
+@@ -57,7 +57,7 @@
+     url='www.nupack.org',
+     package_data=package_data,
+     packages=find_packages(include=('nupack**',)),
+-    scripts=['nupack/scripts/%s' % x for x in 'complexdefect complexes concentrations count mfe energy pairs sample subopt prob pfunc'.split()],
++    #scripts=['nupack/scripts/%s' % x for x in 'complexdefect complexes concentrations count mfe energy pairs sample subopt prob pfunc'.split()],
+     cmdclass={'install': PostInstallCommand}
+ )
+ 
