@@ -82,7 +82,7 @@ src_compile() {
 
 src_install() {
 	cd ${S}/build
-	#distutils-r1_python_install
+	distutils-r1_python_install
 	esetup.py build
 	python_moduleinto nupack
 	python_domodule nupack
