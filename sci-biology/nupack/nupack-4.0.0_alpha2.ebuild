@@ -25,6 +25,7 @@ SRC_URI="${REPO}/${PV}.tar.gz -> nupack.tar.gz
 S="${WORKDIR}/nupack-4.0.a2"
 
 PYTHON_COMPAT=( python3_{6,7,8} )
+DISTUTILS_SINGLE_IMPL=1
 inherit distutils-r1
 
 KEYWORDS="~amd64 ~x86"
@@ -78,11 +79,11 @@ src_configure() {
 src_compile() {
 	cd ${S}/build
 	cmake --build . --target python
+	esetup.py build
 }
 
-src_install() {
+python_install() {
 	cd ${S}/build
-	esetup.py build
 	distutils-r1_python_install
 	#python_moduleinto nupack
 	#python_domodule nupack
