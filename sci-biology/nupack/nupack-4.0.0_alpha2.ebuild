@@ -75,6 +75,7 @@ src_unpack() {
 
 src_prepare() {
 	eapply "${FILESDIR}/noscript.patch"
+	eapply_user
 }
 
 src_configure() {
