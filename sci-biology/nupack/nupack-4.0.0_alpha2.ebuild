@@ -93,8 +93,8 @@ src_compile() {
 python_install() {
 	cd ${S}/build
 	distutils-r1_python_install
-	python_moduleinto nupack
-	python_domodule nupack
+	#python_moduleinto
+	python_domodule ${S}/build/build/lib/nupack
 	python_optimize
 }
 
