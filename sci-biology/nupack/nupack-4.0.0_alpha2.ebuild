@@ -57,7 +57,6 @@ src_unpack() {
 	do
 		echo unpacking $i
 		unpack $i.tar.gz
-		#mkdir ${S}/external/$i
 		mv $i*/* ${S}/external/$i
 	done
 
@@ -73,7 +72,7 @@ src_unpack() {
 src_configure() {
 	mkdir ${S}/build
 	cd ${S}/build
-	cmake .. -DBUILD_TESTING=OFF -DREBIND_PYTHON=python3 -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DNUPACK_SIMD_FLAGS="-msse;-msse2;-msse3;-msse4" -DCMAKE_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC -DJSON_USE_INT64_DOUBLE_CONVERSION=1" -DCMAKE_BUILD_TYPE=Release -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+	cmake .. -DBUILD_TESTING=OFF -DREBIND_PYTHON=python -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DNUPACK_SIMD_FLAGS="-msse;-msse2;-msse3;-msse4" -DCMAKE_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC -DJSON_USE_INT64_DOUBLE_CONVERSION=1" -DCMAKE_BUILD_TYPE=Release -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 }
 
 src_compile() {
@@ -81,14 +80,11 @@ src_compile() {
 	cmake --build . --target python
 }
 
-DISTUTILS_USE_SETUPTOOLS="no"
-
 src_install() {
-	cd ${S}
-	pip install build/
-	#pip install external/rebind/
+	cd ${S}/build
+	esetup.py install
+	python_optimize
+	#cd ${S}/build/
+	#python setup.py install
 }
 
-pkg_prerm() {
-	pip uninstall nupack
-}
