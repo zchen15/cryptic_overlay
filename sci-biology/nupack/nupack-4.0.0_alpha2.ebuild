@@ -82,9 +82,8 @@ src_compile() {
 
 src_install() {
 	cd ${S}/build
-	esetup.py install
+	distutils-r1_python_install
+	#esetup.py install
 	python_optimize
-	#cd ${S}/build/
-	#python setup.py install
 }
 
