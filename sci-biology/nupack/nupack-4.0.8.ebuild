@@ -12,11 +12,8 @@ SRC_URI="${REPO}/src.tar.gz -> nupack.tar.gz
 		${REPO}/lilwil.tar.gz
 		${REPO}/cmake-modules.tar.gz
 		${REPO}/backward-cpp.tar.gz
-		${REPO}/find-tbb.tar.gz
 		${REPO}/nupack-draw.tar.gz
 		${REPO}/gecode.tar.gz
-		${REPO}/visualization.tar.gz
-		${REPO}/armadillo.tar.gz
 		${REPO}/jsoncpp.tar.gz
 		https://github.com/remymuller/boost.simd/archive/v4.17.6.0.tar.gz -> boost-simd.tar.gz
 		https://github.com/cpp-taskflow/cpp-taskflow/archive/v2.4.0.tar.gz -> cpp-taskflow.tar.gz
@@ -26,7 +23,6 @@ SRC_URI="${REPO}/src.tar.gz -> nupack.tar.gz
 		https://github.com/gabime/spdlog/archive/v1.5.0.tar.gz -> spdlog.tar.gz"
 #https://github.com/Gecode/gecode/archive/release-6.2.0.tar.gz -> gecode.tar.gz
 #https://github.com/open-source-parsers/jsoncpp/archive/1.9.2.tar.gz -> jsoncpp.tar.gz
-#S="${WORKDIR}/nupack-4.0.a2"
 S="${WORKDIR}/nupack"
 
 PYTHON_COMPAT=( python3_{6,7,8} )
@@ -55,7 +51,8 @@ src_unpack() {
 	unpack nupack.tar.gz
 	# unpack external modules
 	mkdir ${S}/external
-	for i in rebind lilwil spdlog json jsoncpp gecode backward-cpp cmake-modules nupack-draw
+	#for i in rebind lilwil spdlog json jsoncpp gecode backward-cpp cmake-modules nupack-draw
+	for i in rebind spdlog json gecode backward-cpp cmake-modules
 	do
 		echo unpacking $i
 		unpack $i.tar.gz
