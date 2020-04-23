@@ -1,11 +1,23 @@
---- nupack-4.0.a2.orig/package/setup.py	2019-09-25 10:12:20.000000000 -0700
-+++ nupack-4.0.a2/package/setup.py	2020-04-22 12:57:35.347303556 -0700
-@@ -57,7 +57,7 @@
+--- nupack/package/setup.py	2020-04-22 14:27:46.000000000 -0700
++++ nupack/package/setup.py	2020-04-22 16:57:59.150917576 -0700
+@@ -13,10 +13,7 @@
+ from shutil import copy2
+ import os, site
+ 
+-NAME = '@NUPACK_NAME@' # configured by CMake
+-
+-if '@' in NAME:
+-    NAME = 'nupack'
++NAME = 'nupack' # configured by CMake
+ 
+ def fix_linking():
+     dylib_substrings = ['boost', 'arpack', 'superlu', 'tbb', 'stdc++', 'blas', 'armadillo']
+@@ -61,7 +58,7 @@
      url='www.nupack.org',
      package_data=package_data,
-     packages=find_packages(include=('nupack**',)),
--    scripts=['nupack/scripts/%s' % x for x in 'complexdefect complexes concentrations count mfe energy pairs sample subopt prob pfunc'.split()],
-+    #scripts=['nupack/scripts/%s' % x for x in 'complexdefect complexes concentrations count mfe energy pairs sample subopt prob pfunc'.split()],
+     packages=find_packages(include=(NAME + '**',)),
+-    scripts=['executables/%s' % x for x in 'complexdefect complexes concentrations count mfe energy pairs sample subopt prob pfunc'.split()],
++#    scripts=['executables/%s' % x for x in 'complexdefect complexes concentrations count mfe energy pairs sample subopt prob pfunc'.split()],
      cmdclass={'install': PostInstallCommand}
  )
  

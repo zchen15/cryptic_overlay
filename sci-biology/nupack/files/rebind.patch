@@ -1,20 +1,18 @@
---- nupack-4.0.a2.orig/external/rebind/setup.py	2020-04-22 13:55:13.965851357 -0700
-+++ nupack-4.0.a2/external/rebind/setup.py	2020-04-22 13:56:36.387517177 -0700
-@@ -1,8 +1,8 @@
+--- nupack/external/rebind/setup.py	2020-04-22 14:29:11.000000000 -0700
++++ nupack/external/rebind/setup.py	2020-04-22 17:00:42.864226353 -0700
+@@ -1,9 +1,6 @@
  import os
  from setuptools import setup
  
 -def read(fname):
 -    return open(os.path.join(os.path.dirname(__file__), fname)).read()
-+#def read(fname):
-+#    return open(os.path.join(os.path.dirname(__file__), fname)).read()
- 
+-
  setup(
      name="rebind",
-@@ -13,5 +13,5 @@
+     version="0.0.0",
+@@ -13,5 +10,4 @@
      keywords="C++ unit test framework",
      url="http://packages.python.org/an_example_pypi_project",
      packages=['rebind'],
 -    long_description=read('README.md'),
-+#    long_description=read('README.md'),
  )

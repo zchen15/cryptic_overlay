@@ -54,23 +54,26 @@ src_unpack() {
 	do
 		echo unpacking $i
 		unpack $i.tar.gz
+		mkdir ${S}/external/$i
 		mv $i*/* ${S}/external/$i
 	done
 
 	echo unpacking boost.simd
 	unpack boost-simd.tar.gz
+	mkdir ${S}/external/boost-simd
 	mv boost.simd*/* ${S}/external/boost-simd
 
 	echo unpacking cmake common
 	unpack cmake-common.tar.gz
+	mkdir ${S}/external/cmake-common
 	mv CMake*/* ${S}/external/cmake-common
 }
 
-#src_prepare() {
-#	eapply "${FILESDIR}/noscript.patch"
-#	eapply "${FILESDIR}/rebind.patch"
-#	eapply_user
-#}
+src_prepare() {
+	eapply "${FILESDIR}/noscript.patch"
+	eapply "${FILESDIR}/rebind.patch"
+	eapply_user
+}
 
 src_configure() {
 	mkdir ${S}/build
