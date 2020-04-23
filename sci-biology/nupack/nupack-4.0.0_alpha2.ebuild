@@ -16,7 +16,10 @@ SRC_URI="${REPO}/src.tar.gz -> nupack.tar.gz
 		${REPO}/nupack-draw.tar.gz
 		${REPO}/gecode.tar.gz
 		${REPO}/visualization.tar.gz
+		${REPO}/armadillo.tar.gz
 		https://github.com/remymuller/boost.simd/archive/v4.17.6.0.tar.gz -> boost-simd.tar.gz
+		https://github.com/open-source-parsers/jsoncpp/archive/1.9.2.tar.gz -> jsoncpp.tar.gz
+		https://github.com/cpp-taskflow/cpp-taskflow/archive/v2.4.0.tar.gz -> cpp-taskflow.tar.gz
 		https://github.com/nlohmann/json/archive/v3.7.3.tar.gz -> json.tar.gz
 		https://github.com/sakra/cotire/archive/cotire-1.8.1.tar.gz -> cotire.tar.gz
 		https://github.com/Eyescale/CMake/archive/2018.02.tar.gz -> cmake-common.tar.gz
@@ -51,7 +54,7 @@ src_unpack() {
 	unpack nupack.tar.gz
 	# unpack external modules
 	mkdir ${S}/external
-	for i in rebind lilwil spdlog json gecode backward-cpp cmake-modules nupack-draw
+	for i in rebind lilwil spdlog json jsoncpp cpp-taskflow gecode armadillo backward-cpp cmake-modules nupack-draw
 	do
 		echo unpacking $i
 		unpack $i.tar.gz
