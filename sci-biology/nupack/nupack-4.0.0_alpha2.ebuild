@@ -9,6 +9,7 @@ HOMEPAGE="http://nupack.org/"
 REPO="https://github.com/zchen15/cryptic_overlay/raw/master/sci-biology/${PN}/files"
 SRC_URI="${REPO}/src.tar.gz -> nupack.tar.gz
 		${REPO}/rebind.tar.gz
+		${REPO}/lilwil.tar.gz
 		${REPO}/cmake-modules.tar.gz
 		${REPO}/backward-cpp.tar.gz
 		${REPO}/find-tbb.tar.gz
@@ -50,7 +51,7 @@ src_unpack() {
 	unpack nupack.tar.gz
 	# unpack external modules
 	mkdir ${S}/external
-	for i in rebind spdlog json gecode backward-cpp cmake-modules nupack-draw
+	for i in rebind lilwil spdlog json gecode backward-cpp cmake-modules nupack-draw
 	do
 		echo unpacking $i
 		unpack $i.tar.gz
@@ -78,7 +79,7 @@ src_prepare() {
 src_configure() {
 	mkdir ${S}/build
 	cd ${S}/build
-	cmake .. -DBUILD_TESTING=OFF -DREBIND_PYTHON=python -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DNUPACK_SIMD_FLAGS="-msse;-msse2;-msse3;-msse4" -DCMAKE_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC -DJSON_USE_INT64_DOUBLE_CONVERSION=1" -DCMAKE_BUILD_TYPE=Release -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+	cmake .. -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DREBIND_PYTHON=python -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DNUPACK_SIMD_FLAGS="-msse;-msse2;-msse3;-msse4" -DCMAKE_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC -DJSON_USE_INT64_DOUBLE_CONVERSION=1" -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 }
 
 src_compile() {
