@@ -56,7 +56,7 @@ mod_files = glob.glob(args.i+'/external/*')
 mod_files = keep_files(mod_files, modules)
 
 # build tars of src from these files
-src_folder = ['CMakeLists.txt','README.md','cmake','nupack/nupack','dev/nj','dev/test','executables','parameters','package','python']
+src_folder = ['CMakeLists.txt','README.md','cmake','nupack/nupack','dev','executables','parameters','package','python']
 src_files = glob.glob(args.i+'/*')
 src_files = keep_files(src_files, src_folder)
 
