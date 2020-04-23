@@ -17,14 +17,15 @@ SRC_URI="${REPO}/src.tar.gz -> nupack.tar.gz
 		${REPO}/gecode.tar.gz
 		${REPO}/visualization.tar.gz
 		${REPO}/armadillo.tar.gz
+		${REPO}/jsoncpp.tar.gz
 		https://github.com/remymuller/boost.simd/archive/v4.17.6.0.tar.gz -> boost-simd.tar.gz
-		https://github.com/open-source-parsers/jsoncpp/archive/1.9.2.tar.gz -> jsoncpp.tar.gz
 		https://github.com/cpp-taskflow/cpp-taskflow/archive/v2.4.0.tar.gz -> cpp-taskflow.tar.gz
 		https://github.com/nlohmann/json/archive/v3.7.3.tar.gz -> json.tar.gz
 		https://github.com/sakra/cotire/archive/cotire-1.8.1.tar.gz -> cotire.tar.gz
 		https://github.com/Eyescale/CMake/archive/2018.02.tar.gz -> cmake-common.tar.gz
 		https://github.com/gabime/spdlog/archive/v1.5.0.tar.gz -> spdlog.tar.gz"
 #https://github.com/Gecode/gecode/archive/release-6.2.0.tar.gz -> gecode.tar.gz
+#https://github.com/open-source-parsers/jsoncpp/archive/1.9.2.tar.gz -> jsoncpp.tar.gz
 #S="${WORKDIR}/nupack-4.0.a2"
 S="${WORKDIR}/nupack"
 
@@ -54,7 +55,7 @@ src_unpack() {
 	unpack nupack.tar.gz
 	# unpack external modules
 	mkdir ${S}/external
-	for i in rebind lilwil spdlog json jsoncpp gecode armadillo backward-cpp cmake-modules nupack-draw visualization
+	for i in rebind lilwil spdlog json jsoncpp gecode backward-cpp cmake-modules nupack-draw
 	do
 		echo unpacking $i
 		unpack $i.tar.gz
@@ -86,8 +87,7 @@ src_prepare() {
 src_configure() {
 	mkdir ${S}/build
 	cd ${S}/build
-	#cmake .. -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DREBIND_PYTHON=python -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DNUPACK_SIMD_FLAGS="-msse;-msse2;-msse3;-msse4" -DCMAKE_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC -DJSON_USE_INT64_DOUBLE_CONVERSION=1" -DCMAKE_POSITION_INDEPENDENT_CODE=ON
-	cmake .. -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DREBIND_PYTHON=python -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC -DJSON_USE_INT64_DOUBLE_CONVERSION=1" -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DNUPACK_EXTERNAL_ARMADILLO=ON
+	cmake .. -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DREBIND_PYTHON=python -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DNUPACK_SIMD_FLAGS="-msse;-msse2;-msse3;-msse4" -DCMAKE_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC -DJSON_USE_INT64_DOUBLE_CONVERSION=1" -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 }
 
 src_compile() {

@@ -51,7 +51,7 @@ print('building tarball for ',args.i)
 
 
 # build tars only of these modules
-modules = ['rebind','visualization','nupack-draw','armadillo','backward-cpp','cmake-modules','gecode','find-tbb','lilwil']
+modules = ['rebind','visualization','nupack-draw','jsoncpp','backward-cpp','cmake-modules','gecode','find-tbb','lilwil']
 mod_files = glob.glob(args.i+'/external/*')
 mod_files = keep_files(mod_files, modules)
 

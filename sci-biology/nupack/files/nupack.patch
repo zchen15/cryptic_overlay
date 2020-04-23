@@ -1,15 +1,6 @@
 diff -ru nupack.orig/cmake/Options.cmake nupack/cmake/Options.cmake
 --- nupack.orig/cmake/Options.cmake	2020-04-23 00:54:49.317527718 -0700
-+++ nupack/cmake/Options.cmake	2020-04-23 00:51:28.783600936 -0700
-@@ -9,7 +9,7 @@
- option(NUPACK_COTIRE             "Precompile headers with cotire"                OFF)
- option(NUPACK_DETERMINISTIC      "Use deterministic random number generator"     OFF)
- option(NUPACK_FORTRAN            "Compile Fortran sandbox"                       OFF)
--option(NUPACK_IWYU               "Enable include-what-you-use"                   OFF)
-+option(NUPACK_IWYU               "Enable include-what-you-use"                   ON)
- option(NUPACK_HDF5               "Enable HDF5"                                   OFF)
- option(NUPACK_MATHEMATICA        "Enable Mathematica"                            OFF)
- option(NUPACK_MATLAB             "Enable MATLAB"                                 OFF)
++++ nupack/cmake/Options.cmake	2020-04-23 01:02:24.846447813 -0700
 @@ -19,7 +19,7 @@
  option(NUPACK_ONLY               "Compile only a given file"                     OFF)
  option(NUPACK_DESIGN_ONLY        "Compile only given files with design library"  OFF)
