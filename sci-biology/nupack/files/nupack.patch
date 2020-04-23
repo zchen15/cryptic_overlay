@@ -1,5 +1,5 @@
-diff -ru nupack.orig/cmake/Options.cmake nupack/cmake/Options.cmake
---- nupack.orig/cmake/Options.cmake	2020-04-23 00:54:49.317527718 -0700
+diff -ru nupack/cmake/Options.cmake nupack/cmake/Options.cmake
+--- nupack/cmake/Options.cmake	2020-04-23 00:54:49.317527718 -0700
 +++ nupack/cmake/Options.cmake	2020-04-23 01:02:24.846447813 -0700
 @@ -19,7 +19,7 @@
  option(NUPACK_ONLY               "Compile only a given file"                     OFF)
@@ -10,8 +10,8 @@ diff -ru nupack.orig/cmake/Options.cmake nupack/cmake/Options.cmake
  
  ################################################################################
  
-diff -ru nupack.orig/external/rebind/setup.py nupack/external/rebind/setup.py
---- nupack.orig/external/rebind/setup.py	2020-04-23 00:54:48.937520277 -0700
+diff -ru nupack/external/rebind/setup.py nupack/external/rebind/setup.py
+--- nupack/external/rebind/setup.py	2020-04-23 00:54:48.937520277 -0700
 +++ nupack/external/rebind/setup.py	2020-04-23 00:55:59.728906490 -0700
 @@ -1,9 +1,6 @@
  import os
@@ -29,15 +29,4 @@ diff -ru nupack.orig/external/rebind/setup.py nupack/external/rebind/setup.py
      packages=['rebind'],
 -    long_description=read('README.md'),
  )
-diff -ru nupack.orig/package/setup.py nupack/package/setup.py
---- nupack.orig/package/setup.py	2020-04-23 00:54:49.317527718 -0700
-+++ nupack/package/setup.py	2020-04-23 00:53:56.666496725 -0700
-@@ -61,7 +61,7 @@
-     url='www.nupack.org',
-     package_data=package_data,
-     packages=find_packages(include=(NAME + '**',)),
--    scripts=['executables/%s' % x for x in 'complexdefect complexes concentrations count mfe energy pairs sample subopt prob pfunc'.split()],
-+#    scripts=['executables/%s' % x for x in 'complexdefect complexes concentrations count mfe energy pairs sample subopt prob pfunc'.split()],
-     cmdclass={'install': PostInstallCommand}
- )
- 
+

@@ -9,12 +9,9 @@ HOMEPAGE="http://nupack.org/"
 REPO="https://github.com/zchen15/cryptic_overlay/raw/master/sci-biology/${PN}/files"
 SRC_URI="${REPO}/src.tar.gz -> nupack.tar.gz
 		${REPO}/rebind.tar.gz
-		${REPO}/lilwil.tar.gz
 		${REPO}/cmake-modules.tar.gz
 		${REPO}/backward-cpp.tar.gz
-		${REPO}/nupack-draw.tar.gz
 		${REPO}/gecode.tar.gz
-		${REPO}/jsoncpp.tar.gz
 		https://github.com/remymuller/boost.simd/archive/v4.17.6.0.tar.gz -> boost-simd.tar.gz
 		https://github.com/cpp-taskflow/cpp-taskflow/archive/v2.4.0.tar.gz -> cpp-taskflow.tar.gz
 		https://github.com/nlohmann/json/archive/v3.7.3.tar.gz -> json.tar.gz
@@ -22,7 +19,6 @@ SRC_URI="${REPO}/src.tar.gz -> nupack.tar.gz
 		https://github.com/Eyescale/CMake/archive/2018.02.tar.gz -> cmake-common.tar.gz
 		https://github.com/gabime/spdlog/archive/v1.5.0.tar.gz -> spdlog.tar.gz"
 #https://github.com/Gecode/gecode/archive/release-6.2.0.tar.gz -> gecode.tar.gz
-#https://github.com/open-source-parsers/jsoncpp/archive/1.9.2.tar.gz -> jsoncpp.tar.gz
 S="${WORKDIR}/nupack"
 
 PYTHON_COMPAT=( python3_{6,7,8} )

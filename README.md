@@ -1,2 +1,2 @@
 # cryptic_overlay
-Gentoo dev repo for science
+This is a mysterious overlay forked from the dark corners of the internet. Use with caution

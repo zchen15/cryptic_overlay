@@ -51,13 +51,11 @@ print('building tarball for ',args.i)
 
 
 # build tars only of these modules
-#modules = ['rebind','visualization','nupack-draw','jsoncpp','backward-cpp','cmake-modules','gecode','find-tbb','lilwil']
 modules = ['rebind','backward-cpp','cmake-modules','gecode']
 mod_files = glob.glob(args.i+'/external/*')
 mod_files = keep_files(mod_files, modules)
 
 # build tars of src from these files
-#src_folder = ['CMakeLists.txt','README.md','cmake','nupack/nupack','dev','test','executables','parameters','package','python']
 src_folder = ['CMakeLists.txt','README.md','cmake','nupack/nupack','test','executables','parameters','package','python']
 
 src_files = glob.glob(args.i+'/*')
