@@ -54,13 +54,18 @@ src_unpack() {
 	unpack nupack.tar.gz
 	# unpack external modules
 	mkdir ${S}/external
-	for i in rebind lilwil spdlog json jsoncpp cpp-taskflow gecode armadillo backward-cpp cmake-modules nupack-draw
+	for i in rebind lilwil spdlog json jsoncpp gecode armadillo backward-cpp cmake-modules nupack-draw
 	do
 		echo unpacking $i
 		unpack $i.tar.gz
 		mkdir ${S}/external/$i
 		mv $i*/* ${S}/external/$i
 	done
+
+	echo unpacking cpp-taskflow
+	unpack cpp-taskflow.tar.gz
+	mkdir ${S}/external/taskflow
+	mv cpp-taskflow*/* ${S}/external/taskflow
 
 	echo unpacking boost.simd
 	unpack boost-simd.tar.gz
