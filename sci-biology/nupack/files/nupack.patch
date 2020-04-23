@@ -1,0 +1,52 @@
+diff -ru nupack.orig/cmake/Options.cmake nupack/cmake/Options.cmake
+--- nupack.orig/cmake/Options.cmake	2020-04-23 00:54:49.317527718 -0700
++++ nupack/cmake/Options.cmake	2020-04-23 00:51:28.783600936 -0700
+@@ -9,7 +9,7 @@
+ option(NUPACK_COTIRE             "Precompile headers with cotire"                OFF)
+ option(NUPACK_DETERMINISTIC      "Use deterministic random number generator"     OFF)
+ option(NUPACK_FORTRAN            "Compile Fortran sandbox"                       OFF)
+-option(NUPACK_IWYU               "Enable include-what-you-use"                   OFF)
++option(NUPACK_IWYU               "Enable include-what-you-use"                   ON)
+ option(NUPACK_HDF5               "Enable HDF5"                                   OFF)
+ option(NUPACK_MATHEMATICA        "Enable Mathematica"                            OFF)
+ option(NUPACK_MATLAB             "Enable MATLAB"                                 OFF)
+@@ -19,7 +19,7 @@
+ option(NUPACK_ONLY               "Compile only a given file"                     OFF)
+ option(NUPACK_DESIGN_ONLY        "Compile only given files with design library"  OFF)
+ option(NUPACK_PGO                "Enable PGO, can be OFF, READ, or WRITE"        OFF)
+-option(NUPACK_EXTERNAL_ARMADILLO "Use external version of armadillo"             OFF)
++option(NUPACK_EXTERNAL_ARMADILLO "Use external version of armadillo"             ON)
+ 
+ ################################################################################
+ 
+diff -ru nupack.orig/external/rebind/setup.py nupack/external/rebind/setup.py
+--- nupack.orig/external/rebind/setup.py	2020-04-23 00:54:48.937520277 -0700
++++ nupack/external/rebind/setup.py	2020-04-23 00:55:59.728906490 -0700
+@@ -1,9 +1,6 @@
+ import os
+ from setuptools import setup
+ 
+-def read(fname):
+-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+-
+ setup(
+     name="rebind",
+     version="0.0.0",
+@@ -13,5 +10,4 @@
+     keywords="C++ unit test framework",
+     url="http://packages.python.org/an_example_pypi_project",
+     packages=['rebind'],
+-    long_description=read('README.md'),
+ )
+diff -ru nupack.orig/package/setup.py nupack/package/setup.py
+--- nupack.orig/package/setup.py	2020-04-23 00:54:49.317527718 -0700
++++ nupack/package/setup.py	2020-04-23 00:53:56.666496725 -0700
+@@ -61,7 +61,7 @@
+     url='www.nupack.org',
+     package_data=package_data,
+     packages=find_packages(include=(NAME + '**',)),
+-    scripts=['executables/%s' % x for x in 'complexdefect complexes concentrations count mfe energy pairs sample subopt prob pfunc'.split()],
++#    scripts=['executables/%s' % x for x in 'complexdefect complexes concentrations count mfe energy pairs sample subopt prob pfunc'.split()],
+     cmdclass={'install': PostInstallCommand}
+ )
+ 

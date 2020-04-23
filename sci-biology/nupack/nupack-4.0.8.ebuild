@@ -48,15 +48,13 @@ BDEPEND="tbb? ( dev-cpp/tbb )
 		dev-libs/spdlog"
 DEPEND=""
 
-PATCHES=("${FILESDIR}/noscript.patch"
-		 "${FILESDIR}/rebind.patch"
-		 "${FILESDIR}/cmake.patch")
+PATCHES=("${FILESDIR}/nupack.patch")
 
 src_unpack() {
 	unpack nupack.tar.gz
 	# unpack external modules
 	mkdir ${S}/external
-	for i in rebind lilwil spdlog json jsoncpp gecode armadillo backward-cpp cmake-modules nupack-draw
+	for i in rebind lilwil spdlog json jsoncpp gecode armadillo backward-cpp cmake-modules nupack-draw visualization
 	do
 		echo unpacking $i
 		unpack $i.tar.gz
@@ -81,16 +79,15 @@ src_unpack() {
 }
 
 src_prepare() {
-	eapply "${FILESDIR}/noscript.patch"
-	eapply "${FILESDIR}/rebind.patch"
-	eapply "${FILESDIR}/cmake.patch"
+	eapply "${FILESDIR}/nupack.patch"
 	eapply_user
 }
 
 src_configure() {
 	mkdir ${S}/build
 	cd ${S}/build
-	cmake .. -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DREBIND_PYTHON=python -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DNUPACK_SIMD_FLAGS="-msse;-msse2;-msse3;-msse4" -DCMAKE_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC -DJSON_USE_INT64_DOUBLE_CONVERSION=1" -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+	#cmake .. -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DREBIND_PYTHON=python -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DNUPACK_SIMD_FLAGS="-msse;-msse2;-msse3;-msse4" -DCMAKE_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC -DJSON_USE_INT64_DOUBLE_CONVERSION=1" -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+	cmake .. -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DREBIND_PYTHON=python -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC -DJSON_USE_INT64_DOUBLE_CONVERSION=1" -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DNUPACK_EXTERNAL_ARMADILLO=ON
 }
 
 src_compile() {
@@ -104,15 +101,16 @@ src_compile() {
 }
 
 python_install() {
-	# install rebind module
-	cd ${S}/external/rebind
-	distutils-r1_python_install
-	#python_optimize
-	python_domodule ${S}/external/rebind/build/lib/rebind
 	# install nupack
 	cd ${S}/build
 	distutils-r1_python_install
-	#python_optimize
+	python_optimize
 	python_domodule ${S}/build/build/lib/nupack
+	# install rebind module
+	cd ${S}/external/rebind
+	distutils-r1_python_install
+	python_optimize
+	python_moduleinto rebind
+	python_domodule ${S}/external/rebind/build/lib/rebind
 }
 
