@@ -48,7 +48,9 @@ BDEPEND="tbb? ( dev-cpp/tbb )
 		dev-libs/spdlog"
 DEPEND=""
 
-PATCHES=("${FILESDIR}/noscript.patch")
+PATCHES=("${FILESDIR}/noscript.patch"
+		 "${FILESDIR}/rebind.patch"
+		 "${FILESDIR}/cmake.patch")
 
 src_unpack() {
 	unpack nupack.tar.gz
@@ -81,6 +83,7 @@ src_unpack() {
 src_prepare() {
 	eapply "${FILESDIR}/noscript.patch"
 	eapply "${FILESDIR}/rebind.patch"
+	eapply "${FILESDIR}/cmake.patch"
 	eapply_user
 }
 
