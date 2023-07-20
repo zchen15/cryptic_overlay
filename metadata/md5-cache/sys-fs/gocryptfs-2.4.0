@@ -1,0 +1,11 @@
+DEFINED_PHASES=compile install unpack
+DESCRIPTION=Encrypted overlay filesystem written in Go
+EAPI=7
+HOMEPAGE=https://github.com/rfjakob/gocryptfs/
+IUSE=ssl
+KEYWORDS=amd64 x86
+LICENSE=MIT
+RDEPEND=sys-fs/fuse ssl? ( dev-libs/openssl:0 )
+SLOT=0
+SRC_URI=https://github.com/rfjakob/gocryptfs/releases/download/v2.4.0/gocryptfs_v2.4.0_src-deps.tar.gz -> gocryptfs.tar.gz https://github.com/rfjakob/gocryptfs/releases/download/v2.4.0/gocryptfs_v2.4.0_linux-static_amd64.tar.gz -> gocryptfs-bin.tar.gz
+_md5_=9b243404da7747baf09c4b31d1d20acb
