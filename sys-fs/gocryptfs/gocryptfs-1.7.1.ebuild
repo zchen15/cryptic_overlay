@@ -2,8 +2,8 @@ EAPI=7
 
 DESCRIPTION="Encrypted overlay filesystem written in Go"
 HOMEPAGE="https://github.com/rfjakob/gocryptfs/"
-SRC_URI="https://github.com/rfjakob/${PN}/releases/download/v${PV}/${PN}_v${PV}_src-deps.tar.gz -> gocryptfs.tar.gz
-		https://github.com/rfjakob/${PN}/releases/download/v${PV}/${PN}_v${PV}_linux-static_amd64.tar.gz -> gocryptfs-bin.tar.gz"
+SRC_URI="https://github.com/rfjakob/${PN}/releases/download/v${PV}/${PN}_v${PV}_src-deps.tar.gz -> gocryptfs-${PV}.tar.gz
+		https://github.com/rfjakob/${PN}/releases/download/v${PV}/${PN}_v${PV}_linux-static_amd64.tar.gz -> gocryptfs-bin-${PV}.tar.gz"
 S1="${WORKDIR}/${PN}_v${PV}_src-deps"
 S2="${WORKDIR}/${PN}_V${PV}_linux-static_amd64.tar.gz"
 S="${WORKDIR}"
@@ -19,7 +19,7 @@ BDEPEND=""
 DEPEND=""
 
 src_unpack() {
-	unpack gocryptfs-bin.tar.gz
+	unpack gocryptfs-bin-${PV}.tar.gz
 	#unpack gocryptfs.tar.gz
 	#mkdir ${HOME}/go
 	#ln -s ${S1}/vendor ${HOME}/go/src
